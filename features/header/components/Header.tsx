@@ -1,14 +1,14 @@
-"use client";
 import { Calendar, Target } from "lucide-react";
 
-export default function Header() {
-  const today = new Date().toLocaleDateString("ja-jp", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  });
+interface HeaderProps {
+  /**
+   * 表示用の日付文字列（例："2025年6月23日月曜日"）。
+   * サーバーサイドで生成された、日本語ロケール形式のフォーマットを想定。
+   */
+  today: string;
+}
 
+export default function Header({ today }: HeaderProps) {
   return (
     <header className="text-center">
       <div className="flex items-center justify-center mb-4">
