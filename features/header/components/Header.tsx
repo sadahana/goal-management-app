@@ -8,7 +8,7 @@ interface HeaderProps {
   today: string;
 }
 
-export default function Header({ today }: HeaderProps) {
+export const Header: React.FC<HeaderProps> = ({ today }) => {
   return (
     <header className="text-center">
       <div className="flex items-center justify-center mb-4">
@@ -29,4 +29,4 @@ export default function Header({ today }: HeaderProps) {
       </div>
     </header>
   );
-}
+};

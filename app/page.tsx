@@ -1,4 +1,4 @@
-import Header from "@/features/header/components/Header";
+import { Header } from "@/features/header/components/Header";
 import { getTodayFormatted } from "./lib/date";
 
 export default function Home() {
