@@ -6,16 +6,18 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Header */}
-      <Header today={today} />
-      {/* Progress Stats */}
-      <div className=""></div>
-      {/* Add Goal Form */}
-      <div className=""></div>
-      {/* Goal List */}
-      <div className=""></div>
-      {/* Footer */}
-      <div className=""></div>
+      <div className="flex flex-col gap-8">
+        {/* Header */}
+        <Header today={today} />
+        {/* Progress Stats */}
+        <div className=""></div>
+        {/* Add Goal Form */}
+        <div className=""></div>
+        {/* Goal List */}
+        <div className=""></div>
+        {/* Footer */}
+        <div className=""></div>
+      </div>
     </div>
   );
 }
