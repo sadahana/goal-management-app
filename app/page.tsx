@@ -1,7 +1,13 @@
+"use client";
+
 import { Header } from "@/features/header/components/Header";
 import { getTodayFormatted } from "./lib/date";
+import { AddGoalForm } from "@/features/goals/containers/AddGoalForm";
+import { useGoals } from "./hooks/useGoals";
 
 export default function Home() {
+  const { addGoal } = useGoals();
+
   const today = getTodayFormatted();
 
   return (
@@ -12,7 +18,7 @@ export default function Home() {
         {/* Progress Stats */}
         <div className=""></div>
         {/* Add Goal Form */}
-        <div className=""></div>
+        <AddGoalForm onAdd={addGoal} />
         {/* Goal List */}
         <div className=""></div>
         {/* Footer */}
