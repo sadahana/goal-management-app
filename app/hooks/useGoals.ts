@@ -16,8 +16,21 @@ export const useGoals = () => {
     setGoals((prev) => [...prev, newGoal]);
   };
 
-  // TODO: 削除
+  const toggleGoal = (goalId: string) => {
+    setGoals((prev) =>
+      prev.map((goal) =>
+        goal.id === goalId
+          ? {
+              ...goal,
+              completed: !goal.completed,
+              completedAt: goal.completed ? undefined : new Date(),
+            }
+          : goal
+      )
+    );
+  };
+
   console.log(goals);
 
-  return { addGoal };
+  return { goals, addGoal, toggleGoal };
 };

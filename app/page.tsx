@@ -4,9 +4,10 @@ import { Header } from "@/features/header/components/Header";
 import { getTodayFormatted } from "./lib/date";
 import { AddGoalForm } from "@/features/goals/containers/AddGoalForm";
 import { useGoals } from "./hooks/useGoals";
+import { GoalCard } from "@/features/goals/components/GoalCard";
 
 export default function Home() {
-  const { addGoal } = useGoals();
+  const { goals, addGoal, toggleGoal } = useGoals();
 
   const today = getTodayFormatted();
 
@@ -20,7 +21,11 @@ export default function Home() {
         {/* Add Goal Form */}
         <AddGoalForm onAdd={addGoal} />
         {/* Goal List */}
-        <div className=""></div>
+        <div>
+          {goals.map((goal) => {
+            return <GoalCard key={goal.id} goal={goal} onToggle={toggleGoal} />;
+          })}
+        </div>
         {/* Footer */}
         <div className=""></div>
       </div>
