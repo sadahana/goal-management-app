@@ -31,6 +31,7 @@ export const GoalCard: React.FC<GoalCardProps> = ({ goal, onToggle }) => {
       }`}
     >
       <div className="p-6">
+        {/* GoalCardHeader */}
         <div className="flex items-center space-x-3">
           <button
             onClick={() => onToggle && onToggle(goal.id)}
@@ -51,6 +52,27 @@ export const GoalCard: React.FC<GoalCardProps> = ({ goal, onToggle }) => {
             <span className="mr-1">{priorityIcons[goal.priority]}</span>
             {goal.priority.toUpperCase()}
           </div>
+        </div>
+
+        {/* GoalCardContents */}
+        <div>
+          <h3
+            className={`text-lg font-semibold mb-2 transition-all duration-300 ${
+              goal.completed ? "text-green-700 line-through" : "text-gray-800"
+            }`}
+          >
+            {goal.title}
+          </h3>
+
+          {goal.description && (
+            <p
+              className={`text-sm mb-3 transition-all duration-300 ${
+                goal.completed ? "text-green-600" : "text-gray-600"
+              }`}
+            >
+              {goal.description}
+            </p>
+          )}
         </div>
       </div>
     </div>
