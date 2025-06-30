@@ -51,7 +51,7 @@ export const GoalCard: React.FC<GoalCardProps> = ({
 
   return (
     <div
-      className={`group border-2 rounded-xl ${
+      className={`group relative border-2 rounded-xl ${
         goal.completed
           ? "border-green-200 bg-green-50"
           : "border-gray-200 hover:border-blue-300"
@@ -172,6 +172,14 @@ export const GoalCard: React.FC<GoalCardProps> = ({
           </>
         )}
       </div>
+
+      {goal.completed && (
+        <div className="absolute -top-2 -right-2">
+          <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm animate-bounce">
+            🎉
+          </div>
+        </div>
+      )}
     </div>
   );
 };
