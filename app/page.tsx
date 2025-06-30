@@ -7,7 +7,7 @@ import { useGoals } from "./hooks/useGoals";
 import { GoalCard } from "@/features/goals/components/GoalCard";
 
 export default function Home() {
-  const { goals, addGoal, toggleGoal, deleteGoal } = useGoals();
+  const { goals, addGoal, toggleGoal, updateGoal, deleteGoal } = useGoals();
 
   const today = getTodayFormatted();
 
@@ -28,6 +28,7 @@ export default function Home() {
                 key={goal.id}
                 goal={goal}
                 onToggle={toggleGoal}
+                onUpdate={updateGoal}
                 onDelete={deleteGoal}
               />
             );

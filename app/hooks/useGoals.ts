@@ -55,9 +55,15 @@ export const useGoals = () => {
     );
   };
 
+  const updateGoal = (goalId: string, updates: Partial<Goal>) => {
+    setGoals((prev) =>
+      prev.map((goal) => (goal.id === goalId ? { ...goal, ...updates } : goal))
+    );
+  };
+
   const deleteGoal = (goalId: string) => {
     setGoals((prev) => prev.filter((goal) => goal.id !== goalId));
   };
 
-  return { goals, addGoal, toggleGoal, deleteGoal };
+  return { goals, addGoal, toggleGoal, updateGoal, deleteGoal };
 };
