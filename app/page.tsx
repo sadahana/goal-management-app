@@ -86,7 +86,9 @@ export default function Home() {
         )}
 
         {/* Footer */}
-        <div className=""></div>
+        <footer className="text-center text-gray-500 mt-12 py-6">
+          <p>Stay focused, stay motivated. You&apos;ve got this! 💪</p>
+        </footer>
       </div>
     </div>
   );
