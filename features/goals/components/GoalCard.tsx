@@ -1,6 +1,6 @@
 "use client";
 import { Goal } from "@/app/types/Goal";
-import { Check } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 
 interface GoalCardProps {
   goal: Goal;
@@ -72,6 +72,21 @@ export const GoalCard: React.FC<GoalCardProps> = ({ goal, onToggle }) => {
             >
               {goal.description}
             </p>
+          )}
+        </div>
+
+        {/* GoalCardFooter */}
+        <div className="flex justify-between items-center text-gray-500">
+          <div className="flex items-center  space-x-2">
+            <Clock size={12} />
+            <span>Created {goal.createdAt.toLocaleDateString()}</span>
+          </div>
+
+          {goal.completed && goal.completedAt && (
+            <div className="flex items-center space-x-2 text-green-600">
+              <Check size={12} />
+              <span>Completed {goal.completedAt.toLocaleDateString()}</span>
+            </div>
           )}
         </div>
       </div>
