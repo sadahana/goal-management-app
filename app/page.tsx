@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         {/* Header */}
         <Header today={today} />
         {/* Progress Stats */}

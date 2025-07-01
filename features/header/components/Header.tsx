@@ -11,16 +11,11 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ today }) => {
   return (
     <header className="text-center">
-      <div className="flex items-center justify-center mb-4">
+      <div className="flex items-center justify-center mb-10">
         <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4">
           <Target className="text-white" size={32} />
         </div>
-        <div>
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
-            Daily Goal Manager
-          </h1>
-          <p className="text-center text-gray-600">一日の目標管理アプリ</p>
-        </div>
+        <h1 className="text-2xl font-bold text-gray-800">Daily Goal Manager</h1>
       </div>
 
       <div className="flex items-center justify-center text-gray-600">

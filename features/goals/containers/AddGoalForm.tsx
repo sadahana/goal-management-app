@@ -110,9 +110,9 @@ export const AddGoalForm: React.FC<AddGoalFormProps> = ({ onAdd }) => {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             >
               <option value="work">💻 Work</option>
-              <option value="personal">🌱 Personal</option>
-              <option value="health">⚡ Health</option>
-              <option value="study">🔥 Study</option>
+              <option value="personal">🩷 Personal</option>
+              <option value="health">🏃 Health</option>
+              <option value="study">📚 Study</option>
             </select>
           </div>
         </div>
