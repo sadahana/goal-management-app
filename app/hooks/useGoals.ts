@@ -3,33 +3,8 @@
 import { useState } from "react";
 import { Goal } from "../types/Goal";
 
-const baseGoal: Goal = {
-  id: "goal-001",
-  title: "朝の散歩",
-  description: "近所を20分ほど歩く",
-  priority: "medium",
-  category: "health",
-  completed: false,
-  createdAt: new Date(),
-  completedAt: undefined,
-};
-
-const variations: Goal[] = [
-  { ...baseGoal, id: "goal-001", title: "通常の目標" },
-  {
-    ...baseGoal,
-    id: "goal-002",
-    title: "完了済み",
-    completed: true,
-    completedAt: new Date(),
-  },
-  { ...baseGoal, id: "goal-003", title: "高優先度", priority: "high" },
-  { ...baseGoal, id: "goal-004", title: "低優先度", priority: "low" },
-  { ...baseGoal, id: "goal-005", title: "説明なし", description: "" },
-];
-
 export const useGoals = () => {
-  const [goals, setGoals] = useState<Goal[]>(variations);
+  const [goals, setGoals] = useState<Goal[]>([]);
 
   const addGoal = (goalData: Omit<Goal, "id" | "completed" | "createdAt">) => {
     const newGoal = {
