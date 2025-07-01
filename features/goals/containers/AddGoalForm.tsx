@@ -45,7 +45,7 @@ export const AddGoalForm: React.FC<AddGoalFormProps> = ({ onAdd }) => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="w-full py-6 border-2 border-dashed border-gray-300 text-gray-500 rounded-xl font-semibold hover:border-blue-400
+        className="w-full py-6 bg-gradient-to-br from-blue-500 to-purple-600  text-white rounded-xl font-semibold hover:border-blue-400
         hover:text-blue-500 transition-all duration-300 group"
       >
         <div className="flex items-center justify-center space-x-2">

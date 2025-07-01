@@ -22,8 +22,6 @@ export default function Home() {
         <Header today={today} />
         {/* Progress Stats */}
         <div className=""></div>
-        {/* Add Goal Form */}
-        <AddGoalForm onAdd={addGoal} />
         {/* Goal List */}
 
         {goals.length === 0 ? (
@@ -84,11 +82,9 @@ export default function Home() {
             )}
           </>
         )}
-
-        {/* Footer */}
-        <footer className="text-center text-gray-500 mt-12 py-6">
-          <p>Stay focused, stay motivated. You&apos;ve got this! 💪</p>
-        </footer>
+        <div className="fixed bottom-0 w-full sm:w-1/3 md:2/3 left-1/2 transform -translate-x-1/2 z-50 px-4 py-4">
+          <AddGoalForm onAdd={addGoal} />
+        </div>
       </div>
     </div>
   );
