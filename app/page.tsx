@@ -16,14 +16,13 @@ export default function Home() {
   const today = getTodayFormatted();
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="flex flex-col gap-8">
         {/* Header */}
         <Header today={today} />
         {/* Progress Stats */}
         <div className=""></div>
         {/* Goal List */}
-
         {goals.length === 0 ? (
           <div className="flex flex-col items-center mt-8">
             <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-4">
@@ -45,7 +44,7 @@ export default function Home() {
                   <span className="w-3 h-3 mr-3 bg-blue-500 rounded-full "></span>
                   Active Goals({activeGoals.length})
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   {activeGoals.map((goal) => (
                     <GoalCard
                       key={goal.id}
@@ -65,7 +64,7 @@ export default function Home() {
                   <span className="w-3 h-3 mr-3 bg-green-500 rounded-full "></span>
                   Completed Goals({completedGoals.length})
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   {completedGoals
                     .filter((goal) => goal.completed)
                     .map((goal) => (
