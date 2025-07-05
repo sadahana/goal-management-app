@@ -90,5 +90,13 @@ export const useGoals = () => {
     setGoals((prev) => prev.filter((goal) => goal.id !== goalId));
   };
 
-  return { goals, addGoal, toggleGoal, updateGoal, deleteGoal };
+  return {
+    goals,
+    getActiveGoals: () => goals.filter((goal) => !goal.completed),
+    getCompletedGoals: () => goals.filter((goal) => goal.completed),
+    addGoal,
+    toggleGoal,
+    updateGoal,
+    deleteGoal,
+  };
 };
