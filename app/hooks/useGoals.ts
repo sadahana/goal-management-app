@@ -57,9 +57,17 @@ export const useGoals = () => {
   }, [goals]);
 
   const addGoal = (goalData: Omit<Goal, "id" | "completed" | "createdAt">) => {
+    const goalId = Date.now().toString();
+
+    const stepsWithGoalId = goalData?.steps?.map((step) => ({
+      ...step,
+      goalId,
+    }));
+
     const newGoal: Goal = {
       ...goalData,
-      id: Date.now().toString(),
+      id: goalId,
+      steps: stepsWithGoalId,
       completed: false,
       createdAt: new Date(),
     };
