@@ -18,6 +18,11 @@ export interface Goal {
   description?: string;
 
   /**
+   * 目標を達成するためのステップ。
+   */
+  steps?: GoalStep[];
+
+  /**
    * 目標の優先度（高・中・低）。
    */
   priority: GoalPriority;
@@ -41,6 +46,28 @@ export interface Goal {
    * 目標が完了した日時（完了していない場合は undefined）。
    */
   completedAt?: Date;
+}
+
+export interface GoalStep {
+  /**
+   * 一意の識別子（UUIDなど）。
+   */
+  id: string;
+
+  /**
+   * 目標のID。
+   */
+  goalId?: string;
+
+  /**
+   * ステップのタイトル（例：「英単語を10個覚える」）。
+   */
+  title: string;
+
+  /**
+   * ステップが完了しているかどうか。
+   */
+  completed: boolean;
 }
 
 /**
