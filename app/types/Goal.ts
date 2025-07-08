@@ -57,7 +57,7 @@ export interface GoalStep {
   /**
    * 目標のID。
    */
-  goalId?: string;
+  goalId: string;
 
   /**
    * ステップのタイトル（例：「英単語を10個覚える」）。
@@ -86,3 +86,10 @@ export type GoalPriority = "high" | "medium" | "low";
  * - "study": 学習（資格・語学・読書など）
  */
 export type GoalCategory = "work" | "personal" | "health" | "study";
+
+export type GoalsActionsType = {
+  onToggle: (id: string) => void;
+  onUpdate: (id: string, updates: Partial<Goal>) => void;
+  onDelete: (id: string) => void;
+  onToggleStep: (goalId: string, stepId: string) => void;
+};

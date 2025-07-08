@@ -1,4 +1,4 @@
-import { Goal } from "@/app/types/Goal";
+import { Goal, GoalsActionsType } from "@/app/types/Goal";
 import React from "react";
 import { GoalCard } from "./GoalCard";
 
@@ -6,11 +6,7 @@ interface GoalSectionProps {
   goals: Goal[];
   title: string;
   dotColorClass: string;
-  goalActions: {
-    onToggle: (id: string) => void;
-    onUpdate: (id: string, updates: Partial<Goal>) => void;
-    onDelete: (id: string) => void;
-  };
+  goalActions: GoalsActionsType;
 }
 
 export const GoalSection: React.FC<GoalSectionProps> = ({
@@ -33,7 +29,7 @@ export const GoalSection: React.FC<GoalSectionProps> = ({
           </h2>
           <div className="grid grid-cols-1 gap-4">
             {goals.map((goal) => (
-              <GoalCard key={goal.id} goal={goal} {...goalActions} />
+              <GoalCard key={goal.id} goal={goal} goalActions={goalActions} />
             ))}
           </div>
         </>
