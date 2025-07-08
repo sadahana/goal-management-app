@@ -65,17 +65,15 @@ export const GoalManagemnetView: React.FC = () => {
         </div>
       ) : (
         <div className="grid gap-6">
-          {goalGroup.map(
-            ({ goals, title, dotColorClass: dotColorClass, status }) => (
-              <GoalSection
-                key={status}
-                goals={goals}
-                title={title}
-                dotColorClass={dotColorClass}
-                goalActions={goalsActions}
-              />
-            )
-          )}
+          {goalGroup.map(({ goals, title, dotColorClass, status }) => (
+            <GoalSection
+              key={status}
+              goals={goals}
+              title={title}
+              dotColorClass={dotColorClass}
+              goalActions={goalsActions}
+            />
+          ))}
         </div>
       )}
       <div className="fixed bottom-0 w-full sm:w-1/3 md:2/3 left-1/2 transform -translate-x-1/2 z-50 px-4 py-4">
