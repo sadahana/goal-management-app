@@ -1,0 +1,88 @@
+name: バグレポート
+description: バグや不具合を報告する
+title: "[Bug] "
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## バグレポート
+        バグや不具合についてご報告ください。詳細な情報をいただくことで、迅速な修正につながります。
+
+  - type: textarea
+    id: overview
+    attributes:
+      label: 概要
+      description: バグの内容を簡潔に説明してください
+      placeholder: "例: ゴール一覧画面で完了済みのゴールが表示されない"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 再現手順
+      description: バグを再現するための手順を教えてください
+      value: |
+        1. 
+        2. 
+        3. 
+      placeholder: "1. ログインする\n2. ゴール一覧画面を開く\n3. ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 期待される動作
+      description: 本来どのような動作をするべきかを説明してください
+      placeholder: "完了済みのゴールも一覧に表示されるべき"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: 実際の動作
+      description: 実際に何が起こったかを説明してください
+      placeholder: "完了済みのゴールが表示されない"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: ブラウザ
+      description: 使用しているブラウザを選択してください
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - その他
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      description: 使用しているオペレーティングシステム
+      placeholder: "例: Windows 11, macOS Ventura, Ubuntu 22.04"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 追加情報
+      description: スクリーンショット、エラーメッセージ、その他の関連情報があれば記載してください
+      placeholder: "エラーコンソールのメッセージ、スクリーンショットなど"
+
+  - type: textarea
+    id: related
+    attributes:
+      label: 関連
+      description: 関連するIssue、PR、ドキュメントなどがあれば記載してください
+      placeholder: "関連するストーリー、タスク、リンク等"
