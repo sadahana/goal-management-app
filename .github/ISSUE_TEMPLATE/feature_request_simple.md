@@ -1,3 +1,11 @@
+---
+name: 機能追加・改善（簡易版）
+about: 新機能の提案や既存機能の改善
+title: '[Feature] '
+labels: enhancement
+assignees: ''
+---
+
 ## 概要
 
 -
