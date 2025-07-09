@@ -57,16 +57,24 @@ export const useGoals = () => {
   }, [goals]);
 
   const addGoal = (goalData: Omit<Goal, "id" | "completed" | "createdAt">) => {
+    const goalId = Date.now().toString();
+
+    const stepsWithGoalId = goalData?.steps?.map((step) => ({
+      ...step,
+      goalId,
+    }));
+
     const newGoal: Goal = {
       ...goalData,
-      id: Date.now().toString(),
+      id: goalId,
+      steps: stepsWithGoalId,
       completed: false,
       createdAt: new Date(),
     };
     setGoals((prev) => [...prev, newGoal]);
   };
 
-  const toggleGoal = (goalId: string) => {
+  const toggleGoalCompleted = (goalId: string) => {
     setGoals((prev) =>
       prev.map((goal) =>
         goal.id === goalId
@@ -90,13 +98,29 @@ export const useGoals = () => {
     setGoals((prev) => prev.filter((goal) => goal.id !== goalId));
   };
 
+  const toggleStepCompleted = (goalId = "", stepId = "") => {
+    if (!goalId || !stepId) return;
+
+    setGoals((goals) =>
+      goals.map((goal) => {
+        if (!goal.steps || goal.id !== goalId) return goal;
+
+        const updatedSteps = goal.steps.map((step) =>
+          step.id === stepId ? { ...step, completed: !step.completed } : step
+        );
+
+        return { ...goal, steps: updatedSteps };
+      })
+    );
+  };
   return {
     goals,
     getActiveGoals: () => goals.filter((goal) => !goal.completed),
     getCompletedGoals: () => goals.filter((goal) => goal.completed),
     addGoal,
-    toggleGoal,
+    toggleGoalCompleted,
     updateGoal,
     deleteGoal,
+    toggleStepCompleted,
   };
 };

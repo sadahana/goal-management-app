@@ -1,13 +1,13 @@
 "use client";
-import { Goal } from "@/app/types/Goal";
+import { Goal, GoalsActionsType } from "@/app/types/Goal";
 import { Check, Clock, Trash, X } from "lucide-react";
 import { useState } from "react";
+import { GoalStepItem } from "./GoalStepItem";
+import { ToggleCompletedButton } from "./ToggleCompletedButton";
 
 interface GoalCardProps {
   goal: Goal;
-  onToggle: (id: string) => void;
-  onUpdate: (id: string, updates: Partial<Goal>) => void;
-  onDelete: (id: string) => void;
+  goalActions: GoalsActionsType;
 }
 
 const priorityColors = {
@@ -29,12 +29,7 @@ const categoryIcons = {
   study: "📚",
 };
 
-export const GoalCard: React.FC<GoalCardProps> = ({
-  goal,
-  onToggle,
-  onUpdate,
-  onDelete,
-}) => {
+export const GoalCard: React.FC<GoalCardProps> = ({ goal, goalActions }) => {
   const [isEditting, setIsEditting] = useState(false);
   const [editTitle, setEditTitle] = useState(goal.title);
   const [editDescription, setEditDescription] = useState(
@@ -43,7 +38,7 @@ export const GoalCard: React.FC<GoalCardProps> = ({
 
   const handleSave = () => {
     if (!editTitle.trim()) return;
-    onUpdate(goal.id, {
+    goalActions.onUpdate(goal.id, {
       title: editTitle.trim(),
       description: editDescription.trim(),
     });
@@ -57,7 +52,7 @@ export const GoalCard: React.FC<GoalCardProps> = ({
   };
 
   const handleDelete = () => {
-    onDelete(goal.id);
+    goalActions.onDelete(goal.id);
     setIsEditting(false);
   };
 
@@ -72,7 +67,7 @@ export const GoalCard: React.FC<GoalCardProps> = ({
       <div className="p-6">
         <GoalCardHeader
           goal={goal}
-          onToggle={onToggle}
+          onToggle={goalActions.onToggle}
           isEditting={isEditting}
           handleCancel={handleCancel}
         />
@@ -87,7 +82,11 @@ export const GoalCard: React.FC<GoalCardProps> = ({
             handleDelete={handleDelete}
           />
         ) : (
-          <GoalCardContents goal={goal} setIsEditting={setIsEditting} />
+          <GoalCardContents
+            goal={goal}
+            setIsEditting={setIsEditting}
+            onToggleStep={goalActions.onToggleStep}
+          />
         )}
       </div>
 
@@ -113,6 +112,10 @@ const GoalCardHeader = ({
   onToggle: (id: string) => void;
   handleCancel: () => void;
 }) => {
+  const handleToggleCompleted = () => {
+    onToggle(goal.id);
+  };
+
   return (
     <div className="flex justify-between items-center mb-4">
       <div className="flex items-center space-x-3">
@@ -140,17 +143,10 @@ const GoalCardHeader = ({
             <X />
           </button>
         ) : (
-          <button
-            onClick={() => onToggle(goal.id)}
-            className={`flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 hover:scale-110
-            ${
-              goal.completed
-                ? "border-green-500 bg-green-500 text-white"
-                : "border-gray-300 hover:border-green-400 hover:bg-green-50"
-            }`}
-          >
-            {goal.completed && <Check size={14} />}
-          </button>
+          <ToggleCompletedButton
+            onClick={handleToggleCompleted}
+            completed={goal.completed}
+          />
         )}
       </div>
     </div>
@@ -160,9 +156,11 @@ const GoalCardHeader = ({
 const GoalCardContents = ({
   goal,
   setIsEditting,
+  onToggleStep,
 }: {
   goal: Goal;
   setIsEditting: (arg0: boolean) => void;
+  onToggleStep: (goalId: string, stepId: string) => void;
 }) => {
   return (
     <>
@@ -183,6 +181,20 @@ const GoalCardContents = ({
           >
             {goal.description}
           </p>
+        )}
+      </div>
+
+      <div>
+        {goal?.steps && goal.steps.length && (
+          <div className="grid gap-4 mb-4">
+            {goal.steps.map((step) => (
+              <GoalStepItem
+                key={step.id}
+                step={step}
+                onToggleStep={onToggleStep}
+              />
+            ))}
+          </div>
         )}
       </div>
 

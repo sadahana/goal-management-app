@@ -13,24 +13,33 @@ interface goalGroup {
   goals: Goal[];
 }
 
+export type goalsActionsType = {
+  onToggle: (id: string) => void;
+  onUpdate: (id: string, updates: Partial<Goal>) => void;
+  onDelete: (id: string) => void;
+  onToggleStep: (goalId: string, stepId: string) => void;
+};
+
 export const GoalManagemnetView: React.FC = () => {
   const {
     goals,
     getActiveGoals,
     getCompletedGoals,
     addGoal,
-    toggleGoal,
+    toggleGoalCompleted,
     updateGoal,
     deleteGoal,
+    toggleStepCompleted,
   } = useGoals();
 
   const activeGoals = getActiveGoals();
   const completedGoals = getCompletedGoals();
 
   const goalsActions = {
-    onToggle: toggleGoal,
+    onToggle: toggleGoalCompleted,
     onUpdate: updateGoal,
     onDelete: deleteGoal,
+    onToggleStep: toggleStepCompleted,
   };
 
   const goalGroup: goalGroup[] = [
@@ -42,7 +51,7 @@ export const GoalManagemnetView: React.FC = () => {
     },
     {
       status: "completed",
-      title: `Active Goals (${completedGoals.length})`,
+      title: `Completed Goals (${completedGoals.length})`,
       dotColorClass: "bg-green-500",
       goals: completedGoals,
     },
@@ -65,17 +74,15 @@ export const GoalManagemnetView: React.FC = () => {
         </div>
       ) : (
         <div className="grid gap-6">
-          {goalGroup.map(
-            ({ goals, title, dotColorClass: dotColorClass, status }) => (
-              <GoalSection
-                key={status}
-                goals={goals}
-                title={title}
-                dotColorClass={dotColorClass}
-                goalActions={goalsActions}
-              />
-            )
-          )}
+          {goalGroup.map(({ goals, title, dotColorClass, status }) => (
+            <GoalSection
+              key={status}
+              goals={goals}
+              title={title}
+              dotColorClass={dotColorClass}
+              goalActions={goalsActions}
+            />
+          ))}
         </div>
       )}
       <div className="fixed bottom-0 w-full sm:w-1/3 md:2/3 left-1/2 transform -translate-x-1/2 z-50 px-4 py-4">

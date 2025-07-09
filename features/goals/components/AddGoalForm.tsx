@@ -1,8 +1,9 @@
 "use client";
 
-import { Goal, GoalCategory, GoalPriority } from "@/app/types/Goal";
+import { Goal, GoalCategory, GoalPriority, GoalStep } from "@/app/types/Goal";
 import { Plus, X } from "lucide-react";
 import { useState } from "react";
+import { GoalStepItem } from "./GoalStepItem";
 
 interface AddGoalFormProps {
   onAdd: (goalData: Omit<Goal, "id" | "completed" | "createdAt">) => void;
@@ -16,6 +17,7 @@ export const AddGoalForm: React.FC<AddGoalFormProps> = ({ onAdd }) => {
   const [category, setCategory] = useState<
     "work" | "personal" | "health" | "study"
   >("work");
+  const [steps, setSteps] = useState<GoalStep[]>([]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ export const AddGoalForm: React.FC<AddGoalFormProps> = ({ onAdd }) => {
     onAdd({
       title: title.trim(),
       description: description.trim() || undefined,
+      steps: steps.filter((step) => step.title !== ""),
       priority,
       category,
     });
@@ -33,12 +36,45 @@ export const AddGoalForm: React.FC<AddGoalFormProps> = ({ onAdd }) => {
     setDescription("");
     setPriority("low");
     setCategory("work");
+    setSteps([]);
 
     setIsOpen(false);
   };
 
   const handleCancel = () => {
     setIsOpen(false);
+  };
+
+  const handleClickAddStep = (e: React.FormEvent) => {
+    e.preventDefault();
+    // // 1つでも title が空のステップがある場合、処理を中断
+    if (steps.some((step) => step.title === "")) return;
+
+    setSteps((prev) => [
+      ...prev,
+      {
+        id: String(steps.length + 1),
+        title: "",
+        completed: false,
+        goalId: "",
+      },
+    ]);
+  };
+
+  const handleStepTitleChange = (
+    id: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSteps((prev) =>
+      prev.map((step) =>
+        step.id === id ? { ...step, title: e.target.value } : step
+      )
+    );
+  };
+
+  const handleDeleteStep = (stepId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    setSteps((prev) => prev.filter((step) => step.id !== stepId));
   };
 
   if (!isOpen) {
@@ -87,6 +123,29 @@ export const AddGoalForm: React.FC<AddGoalFormProps> = ({ onAdd }) => {
           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition-all"
           rows={3}
         />
+
+        <>
+          {steps.length > 0 && (
+            <div className="grid gap-4 mb-4">
+              {steps.map((step) => (
+                <GoalStepItem
+                  key={step.id}
+                  step={step}
+                  disabled
+                  removable
+                  onChange={handleStepTitleChange}
+                  onDelete={handleDeleteStep}
+                />
+              ))}
+            </div>
+          )}
+          <button
+            onClick={handleClickAddStep}
+            className="w-full text-left p-2 cursor-pointer"
+          >
+            ステップを追加
+          </button>
+        </>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
